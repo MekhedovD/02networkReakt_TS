@@ -14,9 +14,8 @@ export type MyPostPropsType = {
 const MyPost = (props: MyPostPropsType) => {
   let postsElement = props.posts.map(p => <Post key={p.id} message={p.message} likeCount={p.likeCount}/>);
 
-  let addPost = () => {
+  let  addPost = () => {
     props.addPostCallback(props.message)
-    props.changeNewPostCallback("")
   };
 
   let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -35,7 +34,6 @@ const MyPost = (props: MyPostPropsType) => {
           />
         </div>
         <div>
-          <button onClick={addPost}>Add post</button>
           <button onClick={addPost}>Add post</button>
         </div>
       </div>

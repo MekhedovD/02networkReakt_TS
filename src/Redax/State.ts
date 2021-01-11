@@ -1,5 +1,12 @@
 import {v1} from "uuid";
-import {renderTree} from "../render";
+// import {renderTree} from "../render";
+
+let onChange = () => {
+  console.log("hello")
+}
+export const subscribe = (callback: () => void) => {
+  onChange = callback
+}
 
 export type PostType = {
   message: string
@@ -59,16 +66,18 @@ let state: RootStateType = {
 export let addPost = (postMessage: string) => {
   const newPost: PostType = {
     id: v1(),
-    message: postMessage,
+    message: state.profilePage.newPostText,
+    // message: postMessage,
     likeCount: 0
   }
   state.profilePage.posts.push(newPost);
-  renderTree(state);
+  state.profilePage.newPostText = "";
+  onChange();
 }
 
 export const changeNewText = (newText: string) => {
   state.profilePage.newPostText = newText;
-  renderTree(state)
+  onChange()
 }
 
 export default state;
