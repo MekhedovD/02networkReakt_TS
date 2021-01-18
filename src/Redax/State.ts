@@ -1,12 +1,4 @@
 import {v1} from "uuid";
-// import {renderTree} from "../render";
-
-let onChange = () => {
-  console.log("hello")
-}
-export const subscribe = (callback: () => void) => {
-  onChange = callback
-}
 
 export type PostType = {
   message: string
@@ -37,47 +29,64 @@ export type RootStateType = {
   sidebar: SidebarType
 }
 
-let state: RootStateType = {
-  profilePage: {
-    posts:  [
-      {message:"Hello! How are you", likeCount: 5, id: v1()},
-      {message:"It's my first post", likeCount: 2, id: v1()},
-    ],
-    newPostText: ""
+export type StoreType = {
+  _state: RootStateType
+  changeNewText: (newText: string) => void
+  addPost: (postMessage: string) => void
+  _onChange: () => void
+  subscribe: (callback: () => void) => void
+  getState: () => RootStateType
+}
+
+const store: StoreType = {
+  _state: {
+    profilePage: {
+      posts: [
+        {message: "Hello! How are you", likeCount: 5, id: v1()},
+        {message: "It's my first post", likeCount: 2, id: v1()},
+      ],
+      newPostText: ""
+    },
+    dialogsPage: {
+      dialogs: [
+        {id: v1(), name: "Dima"},
+        {id: v1(), name: "Sasha"},
+        {id: v1(), name: "Valera"},
+        {id: v1(), name: "Vika"},
+        {id: v1(), name: "Olya"},
+        {id: v1(), name: "Ulya"}
+      ],
+      messages: [
+        {message: "Hi", id: v1()},
+        {message: "How are you", id: v1()},
+        {message: "YO!!!", id: v1()}
+      ]
+    },
+    sidebar: {}
   },
-  dialogsPage: {
-    dialogs: [
-       {id: v1(), name: "Dima"},
-       {id: v1(), name: "Sasha"},
-       {id: v1(), name: "Valera"},
-       {id: v1(), name: "Vika"},
-       {id: v1(), name: "Olya"},
-       {id: v1(), name: "Ulya"}
-     ],
-    messages: [
-       {message:"Hi", id: v1()},
-       {message:"How are you", id: v1()},
-       {message:"YO!!!", id: v1()}
-     ]
-   },
-  sidebar: {}
-}
-
-export let addPost = (postMessage: string) => {
-  const newPost: PostType = {
-    id: v1(),
-    message: state.profilePage.newPostText,
-    // message: postMessage,
-    likeCount: 0
+  changeNewText(newText: string) {
+    this._state.profilePage.newPostText = newText;
+    this._onChange()
+  },
+  addPost(postMessage: string) {
+    const newPost: PostType = {
+      id: v1(),
+      message: postMessage,
+      likeCount: 0
+    }
+    this._state.profilePage.posts.push(newPost);
+    this._state.profilePage.newPostText = "";
+    this._onChange();
+  },
+  _onChange() {
+    console.log("state change")
+  },
+  subscribe(callback) {
+    this._onChange = callback
+  },
+  getState() {
+    return this._state
   }
-  state.profilePage.posts.push(newPost);
-  state.profilePage.newPostText = "";
-  onChange();
 }
 
-export const changeNewText = (newText: string) => {
-  state.profilePage.newPostText = newText;
-  onChange()
-}
-
-export default state;
+export default store;

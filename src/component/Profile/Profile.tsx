@@ -1,12 +1,13 @@
 import React from "react";
 import MyPost from "./MyPost/MyPost";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import state, {changeNewText, PostType} from "../../Redax/State";
+import {PostType} from "../../Redax/State";
 
 export type ProfilePropsType  = {
   message: string
   posts: Array<PostType>
   addPostCallback: (message: string) => void
+  changeNewTextCallback: (newText: string) => void
 }
 
 const Profile = (props: ProfilePropsType) => {
@@ -18,7 +19,7 @@ const Profile = (props: ProfilePropsType) => {
         posts={props.posts}
         addPostCallback={props.addPostCallback}
         message={props.message}
-        changeNewPostCallback={changeNewText}
+        changeNewPostCallback={props.changeNewTextCallback}
       />
     </div>
   )

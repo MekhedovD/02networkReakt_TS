@@ -3,17 +3,19 @@ import "./App.css";
 import Header from "./component/Header/Header";
 import Navbar from "./component/Navbar/Navbar";
 import Profile from "./component/Profile/Profile";
-// import {PostType} from "./component/Profile/MyPost/Post/Post";
 import Dialogs from "./component/Dialogs/Dialogs";
-import {BrowserRouter, Route} from "react-router-dom";
+import {Route} from "react-router-dom";
 import News from "./component/News/News";
 import Settings from "./component/Settings/Settings";
 import Music from "./component/Music/Music";
-import state from "./Redax/State";
-import {addPost} from "./Redax/State";
+import {StoreType} from "./Redax/State";
 
+type PropsType = {
+  store: StoreType
+}
 
-function App() {
+const App: React.FC<PropsType> = (props) => {
+  const state = props.store.getState();
 
   return (
     <div className="app-wrapper">
@@ -25,7 +27,8 @@ function App() {
         />}/>
         <Route path="/profile" render={() => <Profile
           posts={state.profilePage.posts}
-          addPostCallback={addPost}
+          addPostCallback={props.store.addPost.bind(props.store)}
+          changeNewTextCallback={props.store.changeNewText.bind(props.store)}
           message={state.profilePage.newPostText}
         />}/>
         <Route path="/news" render={() => <News/>}/>

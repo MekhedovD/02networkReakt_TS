@@ -1,7 +1,6 @@
 import React, {ChangeEvent} from "react";
 import s from "./MyPost.module.css";
-import {v1} from "uuid";
-import state, {changeNewText, PostType, ProfilePageType} from "../../../Redax/State";
+import state, {PostType} from "../../../Redax/State";
 import Post from "./Post/Post";
 
 export type MyPostPropsType = {
