@@ -1,5 +1,8 @@
 import {v1} from "uuid";
 
+const ADD_POST = "ADD-POST";
+const CHANGE_NEW_TEXT = "CHANGE-NEW-TEXT";
+
 export type PostType = {
   message: string
   likeCount: number
@@ -41,13 +44,14 @@ export type ActionsTypes =  ReturnType<typeof addPostAC> | ReturnType<typeof cha
 
 export const addPostAC = (postMessage: string) => {
   return {
-    type: "ADD-POST",
+    type: ADD_POST,
     postMessage: postMessage
   } as const
 }
+
 export const changeNewTextAC = (newText: string) => {
   return {
-    type: "CHANGE-NEW-TEXT",
+    type: CHANGE_NEW_TEXT,
     newText: newText
   } as const
 }
@@ -88,7 +92,7 @@ const store: StoreType = {
     return this._state
   },
   dispatch(action) {
-    if (action.type === "ADD-POST") {
+    if (action.type === ADD_POST) {
       const newPost: PostType = {
         id: v1(),
         message: action.postMessage,
@@ -97,7 +101,7 @@ const store: StoreType = {
       this._state.profilePage.posts.push(newPost);
       this._state.profilePage.newPostText = "";
       this._onChange();
-    } else if (action.type === "CHANGE-NEW-TEXT") {
+    } else if (action.type === CHANGE_NEW_TEXT) {
       this._state.profilePage.newPostText = action.newText;
       this._onChange()
     }
