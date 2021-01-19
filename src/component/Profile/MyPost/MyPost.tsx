@@ -1,24 +1,27 @@
 import React, {ChangeEvent} from "react";
 import s from "./MyPost.module.css";
-import state, {PostType} from "../../../Redax/State";
+import state, {ActionsTypes, addPostAC, PostType} from "../../../Redax/State";
 import Post from "./Post/Post";
+import {type} from "os";
 
 export type MyPostPropsType = {
   message: string
   posts: Array<PostType>
-  addPostCallback: (PostMessage: string) => void
+  // addPostCallback: (PostMessage: string) => void
   changeNewPostCallback: (newText: string) => void
+  dispatch: (action: ActionsTypes) => void
 }
 
 const MyPost = (props: MyPostPropsType) => {
   let postsElement = props.posts.map(p => <Post key={p.id} message={p.message} likeCount={p.likeCount}/>);
 
-  let  addPost = () => {
-    props.addPostCallback(props.message)
+  let addPost = () => {
+    props.dispatch(addPostAC(props.message))
   };
 
   let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    props.changeNewPostCallback(e.currentTarget.value);
+    // props.changeNewPostCallback(e.currentTarget.value);
+    props.dispatch(e.currentTarget.value);
   }
   console.log(onPostChange)
 

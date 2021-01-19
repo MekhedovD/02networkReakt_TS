@@ -8,7 +8,7 @@ import {Route} from "react-router-dom";
 import News from "./component/News/News";
 import Settings from "./component/Settings/Settings";
 import Music from "./component/Music/Music";
-import {StoreType} from "./Redax/State";
+import store, {StoreType} from "./Redax/State";
 
 type PropsType = {
   store: StoreType
@@ -27,7 +27,8 @@ const App: React.FC<PropsType> = (props) => {
         />}/>
         <Route path="/profile" render={() => <Profile
           posts={state.profilePage.posts}
-          addPostCallback={props.store.addPost.bind(props.store)}
+          dispatch={props.store.dispatch.bind(props.store)}
+          // addPostCallback={props.store.addPost.bind(props.store)}
           changeNewTextCallback={props.store.changeNewText.bind(props.store)}
           message={state.profilePage.newPostText}
         />}/>
