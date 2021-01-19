@@ -1,14 +1,10 @@
 import React, {ChangeEvent} from "react";
 import s from "./MyPost.module.css";
-import state, {ActionsTypes, addPostAC, PostType} from "../../../Redax/State";
+import state, {ActionsTypes, addPostAC, changeNewTextAC, PostType} from "../../../Redax/State";
 import Post from "./Post/Post";
-import {type} from "os";
-
 export type MyPostPropsType = {
   message: string
   posts: Array<PostType>
-  // addPostCallback: (PostMessage: string) => void
-  changeNewPostCallback: (newText: string) => void
   dispatch: (action: ActionsTypes) => void
 }
 
@@ -20,8 +16,7 @@ const MyPost = (props: MyPostPropsType) => {
   };
 
   let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    // props.changeNewPostCallback(e.currentTarget.value);
-    props.dispatch(e.currentTarget.value);
+    props.dispatch(changeNewTextAC(e.currentTarget.value));
   }
   console.log(onPostChange)
 

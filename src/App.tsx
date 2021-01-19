@@ -28,8 +28,6 @@ const App: React.FC<PropsType> = (props) => {
         <Route path="/profile" render={() => <Profile
           posts={state.profilePage.posts}
           dispatch={props.store.dispatch.bind(props.store)}
-          // addPostCallback={props.store.addPost.bind(props.store)}
-          changeNewTextCallback={props.store.changeNewText.bind(props.store)}
           message={state.profilePage.newPostText}
         />}/>
         <Route path="/news" render={() => <News/>}/>

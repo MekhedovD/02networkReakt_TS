@@ -31,16 +31,11 @@ export type RootStateType = {
 
 export type StoreType = {
   _state: RootStateType
-  changeNewText: (newText: string) => void
-  addPost: (postMessage: string) => void
   _onChange: () => void
   subscribe: (callback: () => void) => void
   getState: () => RootStateType
   dispatch: (action: ActionsTypes) => void
 }
-
-type AddPostActionType = ReturnType<typeof addPostAC>
-type ChangeNewTextActionType = ReturnType<typeof addPostAC>
 
 export type ActionsTypes =  ReturnType<typeof addPostAC> | ReturnType<typeof changeNewTextAC>;
 
@@ -56,8 +51,6 @@ export const changeNewTextAC = (newText: string) => {
     newText: newText
   } as const
 }
-
-
 
 const store: StoreType = {
   _state: {
@@ -87,20 +80,6 @@ const store: StoreType = {
   },
   _onChange() {
     console.log("state change")
-  },
-  changeNewText(newText: string) {
-    this._state.profilePage.newPostText = newText;
-    this._onChange()
-  },
-  addPost(postMessage: string) {
-    const newPost: PostType = {
-      id: v1(),
-      message: postMessage,
-      likeCount: 0
-    }
-    this._state.profilePage.posts.push(newPost);
-    this._state.profilePage.newPostText = "";
-    this._onChange();
   },
   subscribe(callback) {
     this._onChange = callback
