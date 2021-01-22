@@ -8,10 +8,11 @@ import {Route} from "react-router-dom";
 import News from "./component/News/News";
 import Settings from "./component/Settings/Settings";
 import Music from "./component/Music/Music";
-import store, {StoreType} from "./Redax/State";
+import store, {ActionsTypes, StoreType} from "./Redax/State";
 
 type PropsType = {
   store: StoreType
+  dispatch: (action: ActionsTypes) => void
 }
 
 const App: React.FC<PropsType> = (props) => {
@@ -22,8 +23,11 @@ const App: React.FC<PropsType> = (props) => {
       <Header/>
       <Navbar/>
       <div className="app-wrapper-content">
-        <Route path="/dialogs" render={() =>
-          <Dialogs dialogs={state.dialogsPage.dialogs}  messages={state.dialogsPage.messages}
+        <Route path="/dialogs" render={() =><Dialogs
+          dialogs={state.dialogsPage.dialogs}
+          messages={state.dialogsPage.messages}
+          message={state.dialogsPage.newMessageBody}
+          dispatch={props.store.dispatch.bind(props.store)}
         />}/>
         <Route path="/profile" render={() => <Profile
           posts={state.profilePage.posts}

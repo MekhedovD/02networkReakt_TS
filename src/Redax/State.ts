@@ -3,6 +3,9 @@ import {v1} from "uuid";
 const ADD_POST = "ADD-POST";
 const CHANGE_NEW_TEXT = "CHANGE-NEW-TEXT";
 
+const CHANGE_NEW_MESSAGE_BODY = "CHANGE_NEW_MESSAGE_BODY";
+const SEND_MESSAGE = "SEND_MESSAGE";
+
 export type PostType = {
   message: string
   likeCount: number
@@ -23,6 +26,7 @@ export type ProfilePageType = {
 type DialogPageType = {
   dialogs: Array<DialogType>
   messages: Array<MessageType>
+  newMessageBody: string
 }
 type SidebarType = {}
 
@@ -40,7 +44,11 @@ export type StoreType = {
   dispatch: (action: ActionsTypes) => void
 }
 
-export type ActionsTypes =  ReturnType<typeof addPostAC> | ReturnType<typeof changeNewTextAC>;
+export type ActionsTypes =
+  ReturnType<typeof addPostAC> |
+  ReturnType<typeof changeNewTextAC> |
+  ReturnType<typeof changeNewMessageBodyAC> |
+  ReturnType<typeof sendMessageBodyAC>;
 
 export const addPostAC = (postMessage: string) => {
   return {
@@ -48,11 +56,22 @@ export const addPostAC = (postMessage: string) => {
     postMessage: postMessage
   } as const
 }
-
 export const changeNewTextAC = (newText: string) => {
   return {
     type: CHANGE_NEW_TEXT,
     newText: newText
+  } as const
+}
+export const changeNewMessageBodyAC = (newTextBody: string) => {
+  return {
+    type: CHANGE_NEW_MESSAGE_BODY,
+    newTextBody: newTextBody
+  } as const
+}
+export const sendMessageBodyAC = (sendTextBody: string) => {
+  return {
+    type: SEND_MESSAGE,
+    sendTextBody: sendTextBody
   } as const
 }
 
@@ -78,7 +97,8 @@ const store: StoreType = {
         {message: "Hi", id: v1()},
         {message: "How are you", id: v1()},
         {message: "YO!!!", id: v1()}
-      ]
+      ],
+      newMessageBody: ""
     },
     sidebar: {}
   },
@@ -103,7 +123,15 @@ const store: StoreType = {
       this._onChange();
     } else if (action.type === CHANGE_NEW_TEXT) {
       this._state.profilePage.newPostText = action.newText;
-      this._onChange()
+      this._onChange();
+    } else if (action.type === CHANGE_NEW_MESSAGE_BODY) {
+      this._state.dialogsPage.newMessageBody = action.newTextBody; //body
+      this._onChange();
+    } else if (action.type === SEND_MESSAGE) {
+      let body = this._state.dialogsPage.newMessageBody;
+      this._state.dialogsPage.newMessageBody = "";
+      this._state.dialogsPage.messages.push({id: v1(),message: body});
+      this._onChange();
     }
   }
 }

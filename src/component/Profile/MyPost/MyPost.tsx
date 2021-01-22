@@ -2,6 +2,7 @@ import React, {ChangeEvent} from "react";
 import s from "./MyPost.module.css";
 import state, {ActionsTypes, addPostAC, changeNewTextAC, PostType} from "../../../Redax/State";
 import Post from "./Post/Post";
+
 export type MyPostPropsType = {
   message: string
   posts: Array<PostType>
