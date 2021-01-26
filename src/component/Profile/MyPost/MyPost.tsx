@@ -1,7 +1,8 @@
 import React, {ChangeEvent} from "react";
 import s from "./MyPost.module.css";
-import state, {ActionsTypes, addPostAC, changeNewTextAC, PostType} from "../../../Redax/State";
+import {addPostAC, changeNewTextAC, PostType} from "../../../Redax/profile-reducer";
 import Post from "./Post/Post";
+import {ActionsTypes} from "../../../Redax/State";
 
 export type MyPostPropsType = {
   message: string

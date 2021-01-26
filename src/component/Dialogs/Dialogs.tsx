@@ -4,10 +4,10 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {
   ActionsTypes,
-  changeNewMessageBodyAC,
   DialogType,
-  MessageType, sendMessageBodyAC
+  MessageType,
 } from "../../Redax/State";
+import {sendMessageBodyAC, changeNewMessageBodyAC} from "../../Redax/dialogs-reducer";
 
 export type DialogsPropsType = {
   dialogs: Array<DialogType>
