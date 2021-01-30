@@ -8,10 +8,10 @@ import {Route} from "react-router-dom";
 import News from "./component/News/News";
 import Settings from "./component/Settings/Settings";
 import Music from "./component/Music/Music";
-import store, {ActionsTypes, StoreType} from "./redux/store";
+import {ActionsTypes, ReduxStoreType} from "./redux/redux-store";
 
 type PropsType = {
-  store: StoreType
+  store: ReduxStoreType //
   dispatch: (action: ActionsTypes) => void
 }
 

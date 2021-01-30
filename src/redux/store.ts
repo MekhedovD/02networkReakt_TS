@@ -3,6 +3,7 @@ import profileReducer, {addPostAC, changeNewTextAC} from "./profile-reducer";
 import dialogsReducer, {changeNewMessageBodyAC, sendMessageBodyAC} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
 
+// всё нужно, ничего страшного)
 export type PostType = {
   message: string
   likeCount: number
@@ -27,7 +28,7 @@ export type DialogPageType = {
 }
 export type SidebarType = {}
 
-export type RootStateType = {
+export type RootStateType = { // нужн
   profilePage: ProfilePageType
   dialogsPage: DialogPageType
   sidebar: SidebarType
@@ -41,13 +42,14 @@ export type StoreType = {
   dispatch: (action: ActionsTypes) => void
 }
 
-export type ActionsTypes =
+export type ActionsTypes = // но типы нужны
   ReturnType<typeof addPostAC> |
   ReturnType<typeof changeNewTextAC> |
   ReturnType<typeof changeNewMessageBodyAC> |
   ReturnType<typeof sendMessageBodyAC>;
 
-const store: StoreType = {
+// просто игнорируем, но память)
+const store: StoreType = { // старый стэйт больше не нужен
   _state: {
     profilePage: {
       posts: [
