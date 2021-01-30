@@ -6,8 +6,8 @@ import {
   ActionsTypes,
   DialogType,
   MessageType,
-} from "../../Redax/State";
-import {sendMessageBodyAC, changeNewMessageBodyAC} from "../../Redax/dialogs-reducer";
+} from "../../redux/store";
+import {sendMessageBodyAC, changeNewMessageBodyAC} from "../../redux/dialogs-reducer";
 
 export type DialogsPropsType = {
   dialogs: Array<DialogType>

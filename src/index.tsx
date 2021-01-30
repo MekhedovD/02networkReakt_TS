@@ -4,7 +4,8 @@ import reportWebVitals from './reportWebVitals';
 import ReactDOM from "react-dom";
 import {BrowserRouter} from "react-router-dom";
 import App from "./App";
-import store from "./Redax/State";
+import store from "./redux/redux-store";
+// import store from "./redux/store";
 
 let renderTree = () => {
   ReactDOM.render(
@@ -14,7 +15,6 @@ let renderTree = () => {
     document.getElementById('root')
   );
 }
-
 
 store.subscribe(renderTree);
 renderTree()

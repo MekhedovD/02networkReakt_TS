@@ -8,7 +8,7 @@ import {Route} from "react-router-dom";
 import News from "./component/News/News";
 import Settings from "./component/Settings/Settings";
 import Music from "./component/Music/Music";
-import store, {ActionsTypes, StoreType} from "./Redax/State";
+import store, {ActionsTypes, StoreType} from "./redux/store";
 
 type PropsType = {
   store: StoreType
