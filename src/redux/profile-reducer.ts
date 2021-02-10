@@ -30,9 +30,10 @@ let initialState = {
 const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes) => {
 	switch (action.type) {
 		case ADD_POST:
+			// я введенное соо,щение буду брать не из экшена а из стейта
 			const newPost: PostType = {
 				id: v1(),
-				message: action.postMessage,
+				message: state.newPostText,
 				likeCount: 0
 			}
 			state.posts.push(newPost);
@@ -46,10 +47,10 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
 	}
 }
 
-export const addPostAC = (postMessage: string) => {
+// соответсвенно здесь мне принимать ничего не нужно
+export const addPostAC = () => {
 	return {
-		type: ADD_POST,
-		postMessage: postMessage
+		type: ADD_POST
 	} as const
 }
 export const changeNewTextAC = (newText: string) => {

@@ -2,25 +2,25 @@ import React, {ChangeEvent} from "react";
 import s from "./MyPost.module.css";
 import {addPostAC, changeNewTextAC, PostType} from "../../../redux/profile-reducer";
 import Post from "./Post/Post";
-import {ActionsTypes} from "../../../redux/redux-store";
 
 export type MyPostPropsType = {
-  message: string
   posts: Array<PostType>
-  dispatch: (action: ActionsTypes) => void
+  addPost: () => void
+  onPostChange: (value: string) => void
+  message: string
 }
 
 const MyPost = (props: MyPostPropsType) => {
   let postsElement = props.posts.map(p => <Post key={p.id} message={p.message} likeCount={p.likeCount}/>);
 
   let addPost = () => {
-    props.dispatch(addPostAC(props.message))
+    props.addPost()
   };
 
   let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    props.dispatch(changeNewTextAC(e.currentTarget.value));
+   // 1. Когда я начну изменять занчение ввода, то наверх я передам само значение
+    props.onPostChange(e.currentTarget.value)
   }
-  console.log(onPostChange)
 
   return (
     <div className={s.postSBlock}>
