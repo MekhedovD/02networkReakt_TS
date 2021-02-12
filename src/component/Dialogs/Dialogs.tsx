@@ -16,9 +16,12 @@ export type DialogsPropsType = {
   // dispatch: (action: ActionsTypes) => void
   onNewMessageChange: (value: string) => void
   onSendMessageClick: () => void
-  store: ReduxStoreType
+  //store: ReduxStoreType
 }
 
+// dв эту компоненту стор прокидывать не нужно
+// мы его нигде не используем
+// сейчас проверим
 const Dialogs = (props: DialogsPropsType) => {
 
   let dialogsElement = props.dialogs.map(d => <DialogItem name={d.name} _id={d.id}/>)

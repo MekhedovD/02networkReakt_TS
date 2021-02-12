@@ -10,6 +10,10 @@ import store from "./redux/redux-store";
 let renderTree = () => {
   ReactDOM.render(
     <BrowserRouter>
+      // на самом деле не обязателен
+      // когда ты перейдешь на настоящий редакс
+      // ты вообще не будешь прокидывать ни стор ни диспатч
+      // а пока пусть ,удет
       <App store={store} dispatch={store.dispatch.bind(store)}/>
     </BrowserRouter>,
     document.getElementById('root')
