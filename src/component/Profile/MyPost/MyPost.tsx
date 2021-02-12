@@ -5,9 +5,9 @@ import Post from "./Post/Post";
 
 export type MyPostPropsType = {
   posts: Array<PostType>
+  message: string
   addPost: () => void
   onPostChange: (value: string) => void
-  message: string
 }
 
 const MyPost = (props: MyPostPropsType) => {

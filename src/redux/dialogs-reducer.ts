@@ -39,8 +39,7 @@ let initialState = {
 	newMessageBody: ""
 };
 
-const dialogsReducer = (state: DialogPageType = initialState, action: ActionsTypes) => {
-
+const dialogsReducer = (state: DialogPageType = initialState, action: DialogsActionsTypes) => { // ?
 	switch (action.type) {
 		case CHANGE_NEW_MESSAGE_BODY:
 			state.newMessageBody = action.newTextBody;
@@ -61,10 +60,10 @@ export const changeNewMessageBodyAC = (newTextBody: string) => {
 		newTextBody: newTextBody
 	} as const
 }
-export const sendMessageBodyAC = (sendTextBody: string) => {
+export const sendMessageBodyAC = () => {
 	return {
 		type: SEND_MESSAGE,
-		sendTextBody: sendTextBody
+		// sendTextBody: sendTextBody
 	} as const
 }
 

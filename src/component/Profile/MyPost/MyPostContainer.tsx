@@ -1,17 +1,16 @@
 import React from "react";
-
 import {addPostAC, changeNewTextAC, PostType} from "../../../redux/profile-reducer";
-
 import {ActionsTypes} from "../../../redux/redux-store";
 import MyPost from "./MyPost";
 
-export type MyPostPropsType = {
+export type MyPostContainerPropsType = {
   message: string
   posts: Array<PostType>
   dispatch: (action: ActionsTypes) => void
+
 }
 
-const MyPostContainer = (props: MyPostPropsType) => {
+const MyPostContainer = (props: MyPostContainerPropsType) => {
 
   let addPost = () => {
     // здесь вообще по хорошему вообще не нужно ничего передавать
@@ -28,10 +27,10 @@ const MyPostContainer = (props: MyPostPropsType) => {
   // в компоненту ты дол;ен ,ыл передавать введенное значение? но его неиту
   // ну;но передать
   return (<MyPost
+    message={props.message}
     posts={props.posts}
     addPost={addPost}
     onPostChange={onPostChange}
-    message={props.message}
     />)
 }
 

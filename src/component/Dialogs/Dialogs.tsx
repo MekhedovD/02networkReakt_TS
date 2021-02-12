@@ -5,7 +5,7 @@ import Message from "./Message/Message";
 import {
   ActionsTypes,
   DialogType,
-  MessageType,
+  MessageType, ReduxStoreType,
 } from "../../redux/redux-store";
 import {sendMessageBodyAC, changeNewMessageBodyAC} from "../../redux/dialogs-reducer";
 
@@ -13,7 +13,10 @@ export type DialogsPropsType = {
   dialogs: Array<DialogType>
   messages: Array<MessageType>
   message: string
-  dispatch: (action: ActionsTypes) => void
+  // dispatch: (action: ActionsTypes) => void
+  onNewMessageChange: (value: string) => void
+  onSendMessageClick: () => void
+  store: ReduxStoreType
 }
 
 const Dialogs = (props: DialogsPropsType) => {
@@ -22,11 +25,13 @@ const Dialogs = (props: DialogsPropsType) => {
   let messagesElement = props.messages.map(m => <Message message={m.message} _id={m.id}/>)
 
   let onSendMessageClick = () => {
-    props.dispatch(sendMessageBodyAC(props.message))
+    // props.dispatch(sendMessageBodyAC(props.message))
+    props.onSendMessageClick()
   }
 
   let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    props.dispatch(changeNewMessageBodyAC(e.currentTarget.value));
+    props.onNewMessageChange(e.currentTarget.value)
+    // props.dispatch(changeNewMessageBodyAC(e.currentTarget.value));
   }
 
   return (
