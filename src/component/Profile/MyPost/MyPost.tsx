@@ -1,6 +1,6 @@
 import React, {ChangeEvent} from "react";
 import s from "./MyPost.module.css";
-import {addPostAC, changeNewTextAC, PostType} from "../../../redux/profile-reducer";
+import {PostType} from "../../../redux/profile-reducer";
 import Post from "./Post/Post";
 
 export type MyPostPropsType = {
@@ -18,7 +18,6 @@ const MyPost = (props: MyPostPropsType) => {
   };
 
   let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-   // 1. Когда я начну изменять занчение ввода, то наверх я передам само значение
     props.onPostChange(e.currentTarget.value)
   }
 

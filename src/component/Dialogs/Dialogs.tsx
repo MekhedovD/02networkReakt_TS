@@ -2,39 +2,28 @@ import React, {ChangeEvent} from "react";
 import s from "./Dialogs.module.css"
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {
-  ActionsTypes,
-  DialogType,
-  MessageType, ReduxStoreType,
-} from "../../redux/redux-store";
-import {sendMessageBodyAC, changeNewMessageBodyAC} from "../../redux/dialogs-reducer";
+import {DialogType, MessageType} from "../../redux/dialogs-reducer";
+
 
 export type DialogsPropsType = {
   dialogs: Array<DialogType>
   messages: Array<MessageType>
   message: string
-  // dispatch: (action: ActionsTypes) => void
   onNewMessageChange: (value: string) => void
   onSendMessageClick: () => void
-  //store: ReduxStoreType
 }
 
-// dв эту компоненту стор прокидывать не нужно
-// мы его нигде не используем
-// сейчас проверим
 const Dialogs = (props: DialogsPropsType) => {
 
   let dialogsElement = props.dialogs.map(d => <DialogItem name={d.name} _id={d.id}/>)
   let messagesElement = props.messages.map(m => <Message message={m.message} _id={m.id}/>)
 
   let onSendMessageClick = () => {
-    // props.dispatch(sendMessageBodyAC(props.message))
     props.onSendMessageClick()
   }
 
   let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     props.onNewMessageChange(e.currentTarget.value)
-    // props.dispatch(changeNewMessageBodyAC(e.currentTarget.value));
   }
 
   return (

@@ -1,5 +1,4 @@
 import {v1} from "uuid";
-import {ActionsTypes} from "./store";
 
 const CHANGE_NEW_MESSAGE_BODY = "CHANGE_NEW_MESSAGE_BODY";
 const SEND_MESSAGE = "SEND_MESSAGE";
@@ -62,8 +61,7 @@ export const changeNewMessageBodyAC = (newTextBody: string) => {
 }
 export const sendMessageBodyAC = () => {
 	return {
-		type: SEND_MESSAGE,
-		// sendTextBody: sendTextBody
+		type: SEND_MESSAGE
 	} as const
 }
 

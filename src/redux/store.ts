@@ -1,7 +1,5 @@
-import {v1} from "uuid";
-import profileReducer, {addPostAC, changeNewTextAC} from "./profile-reducer";
-import dialogsReducer, {changeNewMessageBodyAC, sendMessageBodyAC} from "./dialogs-reducer";
-import sidebarReducer from "./sidebar-reducer";
+import {addPostAC, changeNewTextAC} from "./profile-reducer";
+import {changeNewMessageBodyAC, sendMessageBodyAC} from "./dialogs-reducer";
 
 // всё нужно, ничего страшного)
 export type PostType = {
@@ -34,13 +32,13 @@ export type RootStateType = { // нужн
   sidebar: SidebarType
 }
 
-// export type StoreType = {
-//   _state: RootStateType
-//   _onChange: () => void
-//   subscribe: (callback: () => void) => void
-//   getState: () => RootStateType
-//   dispatch: (action: ActionsTypes) => void
-// }
+export type StoreType = {
+  _state: RootStateType
+  _onChange: () => void
+  subscribe: (callback: () => void) => void
+  getState: () => RootStateType
+  dispatch: (action: ActionsTypes) => void
+}
 
 export type ActionsTypes = // но типы нужны
   ReturnType<typeof addPostAC> |

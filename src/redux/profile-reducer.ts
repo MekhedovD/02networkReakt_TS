@@ -1,6 +1,4 @@
 import {v1} from "uuid";
-import {ActionsTypes, RootStateType} from "./store";
-// import {PostType} from "./State";
 
 const ADD_POST = "ADD-POST";
 const CHANGE_NEW_TEXT = "CHANGE-NEW-TEXT";
@@ -27,10 +25,9 @@ let initialState = {
 	newPostText: ""
 };
 
-const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes) => {
+const profileReducer = (state: ProfilePageType = initialState, action: ProfileActionsTypes) => {
 	switch (action.type) {
 		case ADD_POST:
-			// я введенное соо,щение буду брать не из экшена а из стейта
 			const newPost: PostType = {
 				id: v1(),
 				message: state.newPostText,
@@ -47,7 +44,6 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
 	}
 }
 
-// соответсвенно здесь мне принимать ничего не нужно
 export const addPostAC = () => {
 	return {
 		type: ADD_POST
