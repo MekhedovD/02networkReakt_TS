@@ -38,15 +38,15 @@ let initialState = {
 	newMessageBody: ""
 };
 
-const dialogsReducer = (state: DialogPageType = initialState, action: DialogsActionsTypes) => { // ?
+const dialogsReducer = (state: DialogPageType = initialState, action: DialogsActionsTypes) => {
 	switch (action.type) {
 		case CHANGE_NEW_MESSAGE_BODY:
 			state.newMessageBody = action.newTextBody;
 			return state;
 		case SEND_MESSAGE:
-			let body = state.newMessageBody;
+			let newTextBody = state.newMessageBody;
 			state.newMessageBody = "";
-			state.messages.push({id: v1(),message: body});
+			state.messages.push({id: v1(),message: newTextBody});
 			return state;
 		default:
 			return state;
