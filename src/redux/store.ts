@@ -15,11 +15,11 @@ export type DialogType = {
   name: string
   id: string
 }
-export type ProfilePageType = {
+ type ProfilePageType = {
   posts: Array<PostType>
   newPostText: string
 }
-export type DialogPageType = {
+type DialogPageType = {
   dialogs: Array<DialogType>
   messages: Array<MessageType>
   newMessageBody: string
@@ -32,13 +32,13 @@ export type RootStateType = { // нужн
   sidebar: SidebarType
 }
 
-export type StoreType = {
-  _state: RootStateType
-  _onChange: () => void
-  subscribe: (callback: () => void) => void
-  getState: () => RootStateType
-  dispatch: (action: ActionsTypes) => void
-}
+// export type StoreType = {
+//   _state: RootStateType
+//   _onChange: () => void
+//   subscribe: (callback: () => void) => void
+//   getState: () => RootStateType
+//   dispatch: (action: ActionsTypes) => void
+// }
 
 export type ActionsTypes = // но типы нужны
   ReturnType<typeof addPostAC> |

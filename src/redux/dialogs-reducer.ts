@@ -15,13 +15,19 @@ export type DialogType = {
 	name: string
 	id: string
 }
-type DialogPageType = {
+export type DialogPageType = {
 	dialogs: Array<DialogType>
 	messages: Array<MessageType>
 	newMessageBody: string
 }
 
-let initialState = {
+export type InitialStateType = {
+	dialogs: Array<DialogType>
+	messages: Array<MessageType>
+	newMessageBody: string
+}
+
+let initialState: InitialStateType = {
 	dialogs: [
 		{id: v1(), name: "Dima"},
 		{id: v1(), name: "Sasha"},
@@ -38,7 +44,7 @@ let initialState = {
 	newMessageBody: ""
 };
 
-const dialogsReducer = (state: DialogPageType = initialState, action: DialogsActionsTypes) => {
+const dialogsReducer = (state: InitialStateType = initialState, action: DialogsActionsTypes): InitialStateType => {
 	switch (action.type) {
 		case CHANGE_NEW_MESSAGE_BODY:
 			state.newMessageBody = action.newTextBody;

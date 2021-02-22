@@ -1,37 +1,33 @@
 import React from "react";
-import {sendMessageBodyAC, changeNewMessageBodyAC} from "../../redux/dialogs-reducer";
+import {
+  sendMessageBodyAC,
+  changeNewMessageBodyAC,
+  DialogPageType,
+  // InitialStateType,
+  DialogType, MessageType
+} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 // import StoreContext from "../../StoreContex";
 import {connect} from "react-redux";
 
-// const DialogsContainer = () => {
-//   return (
-//     <StoreContext.Consumer>
-//       { (store) => {
-//         let state = store.getState().dialogsPage;
-//
-//         let onSendMessageClick = () => {
-//           store.dispatch(sendMessageBodyAC())
-//         }
-//
-//         let onNewMessageChange = (newTextBody: string) => {
-//           store.dispatch(changeNewMessageBodyAC(newTextBody));
-//         }
-//
-//         return <Dialogs
-//           dialogs={state.dialogs}
-//           message={state.newMessageBody}
-//           messages={state.messages}
-//           onNewMessageChange={onNewMessageChange}
-//           onSendMessageClick={onSendMessageClick}
-//         />
-//       }
-//     }
-//     </StoreContext.Consumer>
-//   )
+type MapStateToPropsType ={
+  dialogs: Array<DialogType>
+  message: string
+  messages: Array<MessageType>
+}
+
+// type MapStateToPropsType ={
+//   dialogs: Array<DialogType>,
+//   message: any,
+//   messages: any
 // }
 
-let mapStateToProps = (state: any) => {  // TYPE!!!
+type MapDispatchToPropsType = {
+  onSendMessageClick: () => void
+  onNewMessageChange: (newTextBody: string) => void
+}
+
+let mapStateToProps = (state: DialogPageType): MapStateToPropsType=> {  // TYPE!!!
   return {
     dialogs: state.dialogs,
     message: state.newMessageBody,
@@ -39,12 +35,12 @@ let mapStateToProps = (state: any) => {  // TYPE!!!
   }
 };
 
-let mapDispatchToProps = (dispatch : any) => { // TYPE!!!
+let mapDispatchToProps = (dispatch : any): MapDispatchToPropsType => { // TYPE!!!
   return {
     onSendMessageClick: () => {
       dispatch(sendMessageBodyAC())
     },
-    onNewMessageChange: (newTextBody: any) => { // TYPE!!!
+    onNewMessageChange: (newTextBody: string) => { // TYPE!!!
       dispatch(changeNewMessageBodyAC(newTextBody))
     },
   }
