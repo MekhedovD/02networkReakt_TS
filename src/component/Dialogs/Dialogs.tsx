@@ -14,7 +14,6 @@ export type DialogsPropsType = {
 }
 
 const Dialogs = (props: DialogsPropsType) => {
-  debugger
   let dialogsElement = props.dialogs.map(d => <DialogItem name={d.name} _id={d.id}/>)
   let messagesElement = props.messages.map(m => <Message message={m.message} _id={m.id}/>)
 
