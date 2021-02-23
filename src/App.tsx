@@ -3,7 +3,6 @@ import "./App.css";
 import Header from "./component/Header/Header";
 import Navbar from "./component/Navbar/Navbar";
 import Profile from "./component/Profile/Profile";
-import Dialogs from "./component/Dialogs/Dialogs";
 import {Route} from "react-router-dom";
 import News from "./component/News/News";
 import Settings from "./component/Settings/Settings";

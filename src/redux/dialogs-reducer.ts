@@ -15,11 +15,6 @@ export type DialogType = {
 	name: string
 	id: string
 }
-export type DialogPageType = {
-	dialogs: Array<DialogType>
-	messages: Array<MessageType>
-	newMessageBody: string
-}
 
 export type InitialStateType = {
 	dialogs: Array<DialogType>

@@ -12,10 +12,6 @@ export type PostType = {
 	likeCount: number
 	id: string
 }
-export type ProfilePageType = {
-	posts: Array<PostType>
-	newPostText: string
-}
 
 type InitialStateType = {
 	posts: Array<PostType>
