@@ -22,6 +22,7 @@ let mapStateToProps = (state: RootStateType): MapStateToPropsType => {
   }
 };
 
+
 let mapDispatchToProps = (dispatch: Dispatch<Action<string>>): MapDispatchToPropsType => {
   return {
     addPost: () => {
