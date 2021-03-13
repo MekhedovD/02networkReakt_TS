@@ -34,12 +34,8 @@ export type UsersType = {
   followed: boolean
 }
 
-// type InitialStateType = {
-//   users: Array<any> ///!!!
-// }
-
 type InitialStateType = {
-  users: Array<UsersType> ///!!!
+  users: Array<UsersType>
 }
 
 let initialState: InitialStateType = {
