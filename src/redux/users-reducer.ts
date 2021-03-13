@@ -1,4 +1,5 @@
-import {v1} from "uuid";
+// import {v1} from "uuid";
+// import axios from "axios";
 
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
@@ -9,48 +10,64 @@ export type UsersActionsTypes =
   ReturnType<typeof unfollowAC> |
   ReturnType<typeof setUsersAC>
 
+// export type UsersType = { не могу прочитать сообщения(
+//   followed: boolean
+//   fullName: string
+//   status: string
+//   id: string
+//   photoUrl: string
+//   location: {
+//     city: string
+//     country: string
+//   }
+// }
+
 export type UsersType = {
-  followed: boolean
-  fullName: string
-  status: string
-  id: string
-  photoUrl: string
-  location: {
-    city: string
-    country: string
+  name: string
+  id: number
+  uniqueUrlName: null
+  photos: {
+    small: string | null
+    large: string | null
   }
+  status: null
+  followed: boolean
 }
 
+// type InitialStateType = {
+//   users: Array<any> ///!!!
+// }
+
 type InitialStateType = {
-  users: Array<UsersType>
+  users: Array<UsersType> ///!!!
 }
 
 let initialState: InitialStateType = {
   users: [
-    {
-      followed: false,
-      fullName: "Dmitry",
-      status: "I am boss",
-      location: {city: "Minsk", country: "Belarus"},
-      photoUrl: "https://www.kinonews.ru/insimgs/2019/newsimg/newsimg87089.jpg",
-      id: v1()
-    },
-    {
-      followed: false,
-      fullName: "Andry",
-      status: "I am boss too",
-      location: {city: "Minsk", country: "Belarus"},
-      photoUrl: "https://www.kinonews.ru/insimgs/2019/newsimg/newsimg87089.jpg",
-      id: v1()
-    },
-    {
-      followed: false,
-      fullName: "Joanna",
-      status: "I am boss too",
-      location: {city: "Minsk", country: "Belarus"},
-      photoUrl: "https://www.kinonews.ru/insimgs/2019/newsimg/newsimg87089.jpg",
-      id: v1()
-    },
+    // {
+    //   followed: false,
+    //   fullName: "Dmitry",
+    //   status: "I am boss",
+    //   location: {city: "Minsk", country: "Belarus"},
+    //   photoUrl: "https://www.kinonews.ru/insimgs/2019/newsimg/newsimg87089.jpg",
+    //   id: v1()
+    // },
+    // {
+    //   followed: false,
+    //   fullName: "Andry",
+    //   status: "I am boss too",
+    //   location: {city: "Minsk", country: "Belarus"},
+    //   photoUrl: "https://www.kinonews.ru/insimgs/2019/newsimg/newsimg87089.jpg",
+    //   id: v1()
+    // },
+    // {
+    //   followed: false,
+    //   fullName: "Joanna",
+    //   status: "I am boss too",
+    //   location: {city: "Minsk", country: "Belarus"},
+    //   photoUrl: "https://www.kinonews.ru/insimgs/2019/newsimg/newsimg87089.jpg",
+    //   id: v1()
+    // },
   ]
 };
 
@@ -87,21 +104,21 @@ const usersReducer = (state: InitialStateType = initialState, action: UsersActio
   }
 }
 
-export const followAC = (userId: string) => { //!!!
+export const followAC = (userId: number) => { //!!!
   return {
     type: FOLLOW,
     userId
   } as const
 }
 
-export const unfollowAC = (userId: string) => { //!!!
+export const unfollowAC = (userId: number) => { //!!!
   return {
     type: UNFOLLOW,
     userId
   } as const
 }
 
-export const setUsersAC = (users: Array<UsersType>) => { //!!!
+export const setUsersAC = (users: Array<UsersType>) => {
   return {
     type: SET_USERS,
     users
