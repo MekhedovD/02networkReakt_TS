@@ -1,9 +1,17 @@
 import React, {Dispatch} from "react";
 import {connect} from "react-redux";
-import Users from "./Users";
 import {RootStateType} from "../../redux/redux-store";
-import {followAC, setCurrentPageAC, setUsersAC, setUsersTotalCountAC, unfollowAC, UsersType} from "../../redux/users-reducer";
+import {
+  followAC,
+  setCurrentPageAC,
+  setUsersAC,
+  setUsersTotalCountAC,
+  unfollowAC,
+  UsersType
+} from "../../redux/users-reducer";
 import {Action} from "redux";
+import axios from "axios";
+import Users from "./Users";
 
 type MapStateToProps = {
   users: Array<UsersType>
@@ -19,6 +27,50 @@ type MapDispatchToProps = {
   setUser: (users: Array<UsersType>) => void,
   setCurrentPage: (pageNumber: number) => void,
   setTotalUsersCount: (totalCount: number) => void,
+}
+
+type UsersPropsType = {
+  users: Array<UsersType>
+  unfollow: (id: number) => void
+  follow: (id: number) => void
+  setUser: (users: Array<UsersType>) => void
+  setCurrentPage: (currentPage: number) => void
+  setTotalUsersCount: (totalCount: number) => void
+  totalUsersCount: number //!
+  pageSize: number //!
+  currentPage: number //!
+}
+
+class UsersContainer extends React.Component<UsersPropsType> {
+
+  componentDidMount() {
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+      .then(response => {
+        this.props.setUser(response.data.items)
+        this.props.setTotalUsersCount(response.data.totalCount)
+      })
+  }
+
+  onPageChanged = (pageNumber: number) => {
+    this.props.setCurrentPage(pageNumber);
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+      .then(response => {
+        this.props.setUser(response.data.items)
+      })
+  }
+
+  render() {
+
+
+    return <Users totalUsersCount={this.props.totalUsersCount}
+                  pageSize={this.props.pageSize}
+                  currentPage={this.props.currentPage}
+                  users={this.props.users}
+                  onPageChanged={this.onPageChanged}
+                  unfollow={this.props.unfollow}
+                  follow={this.props.follow}
+    />
+  }
 }
 
 let mapStateToProps = (state: RootStateType): MapStateToProps => {
@@ -51,4 +103,4 @@ let mapDispatchToProps = (dispatch: Dispatch<Action<string>>): MapDispatchToProp
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Users);
+export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);

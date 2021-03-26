@@ -1,7 +1,7 @@
 import React from "react";
-import {NavLink} from "react-router-dom";
+// import {NavLink} from "react-router-dom";
 import s from "../Dialogs.module.css"
-import {v1} from "uuid";
+// import {v1} from "uuid";
 
 type  MessageType = {
   message: string

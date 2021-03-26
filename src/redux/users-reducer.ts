@@ -1,6 +1,3 @@
-// import {v1} from "uuid";
-// import axios from "axios";
-
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
@@ -81,14 +78,14 @@ const usersReducer = (state: InitialStateType = initialState, action: UsersActio
   }
 }
 
-export const followAC = (userId: number) => { //!!!
+export const followAC = (userId: number) => {
   return {
     type: FOLLOW,
     userId
   } as const
 }
 
-export const unfollowAC = (userId: number) => { //!!!
+export const unfollowAC = (userId: number) => {
   return {
     type: UNFOLLOW,
     userId
