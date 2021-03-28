@@ -1,5 +1,5 @@
 import s from "./User.module.css";
-import UsersPhoto from "../../assets/images/img.png";
+import UsersPhoto from "../../assets/images/img.ava.png";
 import React from "react";
 import {UsersType} from "../../redux/users-reducer";
 

@@ -3,13 +3,15 @@ const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT";
+const TOGGLE_IS_LOADING = "TOGGLE_IS_LOADING";
 
 export type UsersActionsTypes =
   ReturnType<typeof followAC> |
   ReturnType<typeof unfollowAC> |
   ReturnType<typeof setUsersAC> |
   ReturnType<typeof setCurrentPageAC> |
-  ReturnType<typeof setUsersTotalCountAC>
+  ReturnType<typeof setUsersTotalCountAC> |
+  ReturnType<typeof toggleIsLoadingAC>
 
 export type UsersType = {
   name: string
@@ -28,6 +30,7 @@ type InitialStateType = {
   pageSize: number
   totalUsersCount: number
   currentPage: number
+  isLoading: boolean
 }
 
 let initialState: InitialStateType = {
@@ -35,6 +38,7 @@ let initialState: InitialStateType = {
   pageSize: 10,
   totalUsersCount: 0,
   currentPage: 1,
+  isLoading: true,
 };
 
 const usersReducer = (state: InitialStateType = initialState, action: UsersActionsTypes): InitialStateType => {
@@ -73,6 +77,11 @@ const usersReducer = (state: InitialStateType = initialState, action: UsersActio
       return {...state, totalUsersCount: action.totalCount}
     }
 
+
+    case TOGGLE_IS_LOADING: {
+      return {...state, isLoading: action.isLoading}
+    }
+
     default:
       return state
   }
@@ -106,10 +115,17 @@ export const setCurrentPageAC = (currentPage: number) => {
   } as const
 }
 
-  export const setUsersTotalCountAC = (totalCount: number) => {
+export const setUsersTotalCountAC = (totalCount: number) => {
   return {
     type: SET_TOTAL_USERS_COUNT,
     totalCount: totalCount
+  } as const
+}
+
+export const toggleIsLoadingAC = (isLoading: boolean) => {
+  return {
+    type: TOGGLE_IS_LOADING,
+    isLoading
   } as const
 }
 
