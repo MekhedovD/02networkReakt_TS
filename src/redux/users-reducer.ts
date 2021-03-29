@@ -6,12 +6,12 @@ const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT";
 const TOGGLE_IS_LOADING = "TOGGLE_IS_LOADING";
 
 export type UsersActionsTypes =
-  ReturnType<typeof followAC> |
-  ReturnType<typeof unfollowAC> |
-  ReturnType<typeof setUsersAC> |
-  ReturnType<typeof setCurrentPageAC> |
-  ReturnType<typeof setUsersTotalCountAC> |
-  ReturnType<typeof toggleIsLoadingAC>
+  ReturnType<typeof follow> |
+  ReturnType<typeof unfollow> |
+  ReturnType<typeof setUsers> |
+  ReturnType<typeof setCurrentPage> |
+  ReturnType<typeof setTotalUsersCount> |
+  ReturnType<typeof toggleIsLoading>
 
 export type UsersType = {
   name: string
@@ -87,42 +87,42 @@ const usersReducer = (state: InitialStateType = initialState, action: UsersActio
   }
 }
 
-export const followAC = (userId: number) => {
+export const follow = (userId: number) => {
   return {
     type: FOLLOW,
     userId
   } as const
 }
 
-export const unfollowAC = (userId: number) => {
+export const unfollow = (userId: number) => {
   return {
     type: UNFOLLOW,
     userId
   } as const
 }
 
-export const setUsersAC = (users: Array<UsersType>) => {
+export const setUsers = (users: Array<UsersType>) => {
   return {
     type: SET_USERS,
     users
   } as const
 }
 
-export const setCurrentPageAC = (currentPage: number) => {
+export const setCurrentPage = (currentPage: number) => {
   return {
     type: SET_CURRENT_PAGE,
     currentPage
   } as const
 }
 
-export const setUsersTotalCountAC = (totalCount: number) => {
+export const setTotalUsersCount = (totalCount: number) => {
   return {
     type: SET_TOTAL_USERS_COUNT,
     totalCount: totalCount
   } as const
 }
 
-export const toggleIsLoadingAC = (isLoading: boolean) => {
+export const toggleIsLoading = (isLoading: boolean) => {
   return {
     type: TOGGLE_IS_LOADING,
     isLoading
