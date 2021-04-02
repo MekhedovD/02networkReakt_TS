@@ -4,7 +4,7 @@ import reportWebVitals from './reportWebVitals';
 import ReactDOM from "react-dom";
 import {BrowserRouter} from "react-router-dom";
 import App from "./App";
-import store, {RootStateType} from "./redux/redux-store";
+import store from "./redux/redux-store";
 import {Provider} from "react-redux";
 
 
@@ -16,7 +16,6 @@ import {Provider} from "react-redux";
     </BrowserRouter>,
     document.getElementById('root')
   );
-
 
 //
 // let renderTree = (state: RootStateType) => {

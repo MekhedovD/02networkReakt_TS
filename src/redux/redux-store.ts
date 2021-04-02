@@ -16,4 +16,7 @@ export type RootStateType = ReturnType<typeof rootReducer>
 export let store = createStore(rootReducer)
 export type ReduxStoreType = typeof store // новый тип (redux)
 
+// @ts-ignore
+window.store = store
+
 export default store;
