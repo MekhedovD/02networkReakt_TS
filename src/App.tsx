@@ -12,7 +12,6 @@ import ProfileContainer from "./component/Profile/ProfileContainer";
 
 
 const App: React.FC = () => {
-debugger
   return (
     <div className="app-wrapper">
       <Header/>

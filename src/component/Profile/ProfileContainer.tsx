@@ -9,9 +9,7 @@ type MapStateToPropsType = {
   profile: UserProfileType | null
 }
 
-// зачем этот тип ?
 type MapDispatchPropsType = {
-  // здесь должен быть профайл а не юзерАйди
   setUserProfile: (profile: UserProfileType | null) => void
 }
 
@@ -28,7 +26,6 @@ class ProfileContainer extends React.Component<UserProfilePropsType> {
   }
 
   render() {
-    debugger
     return (
       <div>
         <Profile {...this.props} profile={this.props.profile} />
@@ -44,6 +41,4 @@ let mapStateToProps = (state: RootStateType): MapStateToPropsType => {
 };
 
 
-// не было импорнта скорее всего
-// пробуй запустить
-export default connect(mapStateToProps, {setUserProfile :setUserProfile})(ProfileContainer);
+export default connect(mapStateToProps, {setUserProfile: setUserProfile})(ProfileContainer);

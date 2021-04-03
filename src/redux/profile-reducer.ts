@@ -41,10 +41,7 @@ export type UserProfileType = {
 type InitialStateType = {
   posts: Array<PostType>
   newPostText: string
-  // т.е. профайд это не массив, как у тебя было написано
-  // а он может быть либо null либо UserProfileType
   profile: null | UserProfileType
-  // profile: null
 }
 
 let initialState: InitialStateType = {
@@ -53,9 +50,7 @@ let initialState: InitialStateType = {
     {message: "It's my first post", likeCount: 2, id: v1()},
   ],
   newPostText: "",
-  // дело в типизаци профайла
   profile: null
-  // profile: null //?????
 };
 
 
@@ -80,7 +75,6 @@ const profileReducer = (state: InitialStateType = initialState, action: ProfileA
         newPostText: action.newText
       };
     }
-    // все, проблема решена )))
     case SET_USER_PROFILE: {
       return {
         ...state,
