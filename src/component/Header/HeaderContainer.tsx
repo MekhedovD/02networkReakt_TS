@@ -25,7 +25,7 @@ class HeaderContainer extends React.Component<HeaderContainerType> {
       withCredentials: true,
       // перейди на документацию
       headers: {
-        'api-key': '70d80796-3f72-4c1c-8a51-937b510017ff'
+        "api-key": "70d80796-3f72-4c1c-8a51-937b510017ff"
       }
     })
       .then(response => {
