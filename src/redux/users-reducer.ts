@@ -4,6 +4,7 @@ const SET_USERS = "SET_USERS";
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT";
 const TOGGLE_IS_LOADING = "TOGGLE_IS_LOADING";
+const TOGGLE_IS_FOLLOWING_PROGRESS = "TOGGLE_IS_FOLLOWING_PROGRESS";
 
 export type UsersActionsTypes =
   ReturnType<typeof follow> |
@@ -11,7 +12,8 @@ export type UsersActionsTypes =
   ReturnType<typeof setUsers> |
   ReturnType<typeof setCurrentPage> |
   ReturnType<typeof setTotalUsersCount> |
-  ReturnType<typeof toggleIsLoading>
+  ReturnType<typeof toggleIsLoading> |
+  ReturnType<typeof toggleFollowingProgress>
 
 export type UsersType = {
   name: string
@@ -31,6 +33,7 @@ type InitialStateType = {
   totalUsersCount: number
   currentPage: number
   isLoading: boolean
+  followingInProgress: Array<number>
 }
 
 let initialState: InitialStateType = {
@@ -39,6 +42,7 @@ let initialState: InitialStateType = {
   totalUsersCount: 0,
   currentPage: 1,
   isLoading: true,
+  followingInProgress: []
 };
 
 const usersReducer = (state: InitialStateType = initialState, action: UsersActionsTypes): InitialStateType => {
@@ -77,9 +81,15 @@ const usersReducer = (state: InitialStateType = initialState, action: UsersActio
       return {...state, totalUsersCount: action.totalCount}
     }
 
-
     case TOGGLE_IS_LOADING: {
       return {...state, isLoading: action.isLoading}
+    }
+
+    case TOGGLE_IS_FOLLOWING_PROGRESS: {
+      return {...state,
+        followingInProgress: action.isLoading
+          ? [...state.followingInProgress, action.userId]
+          : [...state.followingInProgress.filter(id => id !== action.userId)]}
     }
 
     default:
@@ -126,6 +136,14 @@ export const toggleIsLoading = (isLoading: boolean) => {
   return {
     type: TOGGLE_IS_LOADING,
     isLoading
+  } as const
+}
+
+export const toggleFollowingProgress = (isLoading: boolean, userId: number) => {
+  return {
+    type: TOGGLE_IS_FOLLOWING_PROGRESS,
+    isLoading,
+    userId
   } as const
 }
 

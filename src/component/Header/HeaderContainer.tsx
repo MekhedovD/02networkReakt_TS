@@ -20,10 +20,8 @@ export type HeaderContainerType = MapStateToPropsType & MapDispatchToPropsType
 class HeaderContainer extends React.Component<HeaderContainerType> {
 
   componentDidMount() {
-    // основная пробема была в том что ты в конце поставил фигурную скобку
     axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
       withCredentials: true,
-      // перейди на документацию
       headers: {
         "api-key": "70d80796-3f72-4c1c-8a51-937b510017ff"
       }
