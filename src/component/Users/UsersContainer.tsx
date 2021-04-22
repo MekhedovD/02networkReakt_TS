@@ -1,4 +1,4 @@
-import React, {Dispatch} from "react";
+import React from "react";
 import {connect} from "react-redux";
 import {RootStateType} from "../../redux/redux-store";
 import {
@@ -9,7 +9,6 @@ import {
 } from "../../redux/users-reducer";
 import Users from "./Users";
 import Preloader from "../common/Preolader/Preolader";
-import {usersAPI} from "../../api/api";
 
 type MapStateToProps = {
   users: Array<UsersType>

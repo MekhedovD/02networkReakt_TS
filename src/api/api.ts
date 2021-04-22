@@ -23,30 +23,24 @@ export const usersAPI = {
   unfollow(userId: number) {
     return instance.delete(`follow/${userId}`);
 
+  },
+
+  getProfile(userId: string) {
+    return instance.get(`profile/` + userId);
   }
 }
 
-// export const getUsers2 = (currentPage: number, pageSize: number) => {
-//   return instance.get(`follow?page=${currentPage}&count=${pageSize}`)
-//     .then(response => {
-//       return response.data;
-//     });
-// }
-
-export const userProfileAPI = {
-  setUserProfile(userId: string) {
-    return instance.get(`profile/` + userId)
-      .then(response => {
-        return response.data;
-      });
-  }
-}
-
-// export const authAPI = {
-//   setAuthUserData() {
-//     return instance.get(`auth/me`)
+// export const userProfileAPI = {
+//   setUserProfile(userId: string) {
+//     return instance.get(`profile/` + userId)
 //       .then(response => {
 //         return response.data;
 //       });
 //   }
 // }
+
+export const authAPI = {
+  me() {
+    return instance.get(`auth/me`);
+  }
+}

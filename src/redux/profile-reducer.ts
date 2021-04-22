@@ -1,4 +1,6 @@
 import {v1} from "uuid";
+import {Dispatch} from "react";
+import {usersAPI} from "../api/api";
 
 const ADD_POST = "ADD-POST";
 const CHANGE_NEW_TEXT = "CHANGE-NEW-TEXT";
@@ -54,7 +56,7 @@ let initialState: InitialStateType = {
 };
 
 
-
+//Reducer
 const profileReducer = (state: InitialStateType = initialState, action: ProfileActionsTypes): InitialStateType => {
   switch (action.type) {
     case ADD_POST: {
@@ -86,6 +88,7 @@ const profileReducer = (state: InitialStateType = initialState, action: ProfileA
   }
 }
 
+//ActionCreator
 export const addPostAC = () => {
   return {
     type: ADD_POST
@@ -104,4 +107,10 @@ export const changeNewTextAC = (newText: string) => {
   } as const
 }
 
+//Thunk
+export const getUserProfile = (userId: string) => (dispatch: Dispatch<any>) => {
+  usersAPI.getProfile(userId).then(response => {
+    dispatch(setUserProfile(response.data));
+  })
+}
 export default profileReducer;
