@@ -20,6 +20,8 @@ let initialState = {
   isAuth: false
 };
 
+
+//Reducer
 export const authReducer = (state: AuthStateType = initialState, action: AuthActionsTypes): AuthStateType => {
   switch (action.type) {
     case SET_USER_DATA:
@@ -33,12 +35,15 @@ export const authReducer = (state: AuthStateType = initialState, action: AuthAct
   }
 }
 
+//ActionCreator
 export const setAuthUserData = (id: number | null, email: string | null, login: string | null) => {
   return {
     type: SET_USER_DATA,
     data: {id, email, login}
   } as const
 }
+
+//Thunk
 export const getAuthUserData = () => (dispatch: Dispatch<any>) => {
   authAPI.me()
     .then(response => {
