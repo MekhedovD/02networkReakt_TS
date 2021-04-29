@@ -12,7 +12,7 @@ export type DialogsPropsType = {
   message: string
   onNewMessageChange: (value: string) => void
   onSendMessageClick: () => void
-  isAuth: boolean
+  // isAuth: boolean
 }
 
 const Dialogs = (props: DialogsPropsType) => {
@@ -27,7 +27,7 @@ const Dialogs = (props: DialogsPropsType) => {
     props.onNewMessageChange(e.currentTarget.value)
   }
 
-  if (!props.isAuth) return <Redirect to="/login" />
+  // if (!props.isAuth) return <Redirect to="/login" />
 
   return (
     <div className={s.dialogs}>

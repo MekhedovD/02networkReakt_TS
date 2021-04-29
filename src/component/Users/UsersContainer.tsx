@@ -9,6 +9,7 @@ import {
 } from "../../redux/users-reducer";
 import Users from "./Users";
 import Preloader from "../common/Preolader/Preolader";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 type MapStateToProps = {
   users: Array<UsersType>
@@ -38,7 +39,6 @@ type UsersPropsType = {
   pageSize: number
   currentPage: number
   isLoading: boolean
-  // toggleFollowingProgress: (isLoading: boolean, userId: number) => void
   followingInProgress: Array<number>
   getUsers: (currentPage: number, pageSize: number) => void
 }
@@ -62,7 +62,6 @@ class UsersContainer extends React.Component<UsersPropsType> {
              onPageChanged={this.onPageChanged}
              unfollow={this.props.unfollowSuccess}//
              follow={this.props.followSuccess}
-             // toggleFollowingProgress={this.props.toggleFollowingProgress}
              followingInProgress={this.props.followingInProgress}
       />
     </>
@@ -107,14 +106,11 @@ let mapStateToProps = (state: RootStateType): MapStateToProps => {
 //   }
 // }
 
-export default connect(mapStateToProps, {
+export default withAuthRedirect(connect(mapStateToProps, {
   followSuccess,
   unfollowSuccess,
-  // setUsers,
   setCurrentPage,
-  // setTotalUsersCount,
-  // toggleIsLoading,
   toggleFollowingProgress,
-  // getUsers: getUsersThunkCreator
   getUsers
-})(UsersContainer);
+})(UsersContainer));
+

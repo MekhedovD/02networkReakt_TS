@@ -10,7 +10,6 @@ type MapStateToPropsType = {
 }
 
 type MapDispatchToPropsType = {
-  // setAuthUserData: (id: number | null, email: string | null, login: string | null) => void
   getAuthUserData: () => void
 }
 
