@@ -107,8 +107,6 @@ let mapStateToProps = (state: RootStateType): MapStateToProps => {
 //   }
 // }
 
-
-// Protection
 export default compose<React.ComponentType>(
   connect(mapStateToProps, {
     followSuccess,
@@ -120,12 +118,5 @@ export default compose<React.ComponentType>(
   withAuthRedirect,
 )(UsersContainer)
 
-// No protection
-// export default connect(mapStateToProps, {
-//   followSuccess,
-//   unfollowSuccess,
-//   setCurrentPage,
-//   toggleFollowingProgress,
-//   getUsers
-// })(UsersContainer);
+
 

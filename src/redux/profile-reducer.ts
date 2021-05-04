@@ -36,8 +36,7 @@ export type UserProfileType = {
     small: string
     large: string
   }
-  // status: string
-// }
+  status: string
 }
 
 type InitialStateType = {
