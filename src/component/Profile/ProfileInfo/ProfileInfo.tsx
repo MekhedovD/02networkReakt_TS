@@ -21,11 +21,10 @@ const ProfileInfo = (props: ProfileInfoType) => {
       {/*  <img src="https://tinypng.com/images/social/website.jpg" alt=""/>*/}
       {/*</div>*/}
       <div className={s.descriptionBlock}>
-        <img src={props.profile.photos.large} />
+        <img src={props.profile.photos.large} alt="profile" />
         <ProfileStatus status={props.status}
                        updateStatus={props.updateStatus}
         />
-        {/*<ProfileStatus status={props.profile.status}/>*/}
       </div>
     </div>
   )
