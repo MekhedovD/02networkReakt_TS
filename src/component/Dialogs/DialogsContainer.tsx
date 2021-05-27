@@ -13,7 +13,7 @@ type MapStateToPropsType ={
 }
 
 type MapDispatchToPropsType = {
-  onSendMessageClick: () => void
+  onSendMessageClick: (messageText: string) => void
   onNewMessageChange: (newTextBody: string) => void
 }
 
@@ -27,8 +27,8 @@ let mapStateToProps = (state: RootStateType): MapStateToPropsType=> {
 
 let mapDispatchToProps = (dispatch: Dispatch<Action<string>>): MapDispatchToPropsType => {
   return {
-    onSendMessageClick: () => {
-      dispatch(sendMessageBodyAC())
+    onSendMessageClick: (messageText) => {
+      dispatch(sendMessageBodyAC(messageText))
     },
     onNewMessageChange: (newTextBody: string) => {
       dispatch(changeNewMessageBodyAC(newTextBody))

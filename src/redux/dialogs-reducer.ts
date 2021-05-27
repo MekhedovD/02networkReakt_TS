@@ -50,7 +50,7 @@ const dialogsReducer = (state: InitialStateType = initialState, action: DialogsA
     }
 
     case SEND_MESSAGE: {
-      let newTextBody = state.newMessageBody;
+      let newTextBody = action.messageText;
       return {
         ...state,
         newMessageBody: "",
@@ -69,9 +69,10 @@ export const changeNewMessageBodyAC = (newTextBody: string) => {
     newTextBody: newTextBody
   } as const
 }
-export const sendMessageBodyAC = () => {
+export const sendMessageBodyAC = (messageText: string) => {
   return {
-    type: SEND_MESSAGE
+    type: SEND_MESSAGE,
+    messageText//
   } as const
 }
 

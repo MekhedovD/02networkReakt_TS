@@ -4,6 +4,7 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {DialogType, MessageType} from "../../redux/dialogs-reducer";
 import { Redirect } from "react-router-dom";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
 
 export type DialogsPropsType = {
@@ -13,6 +14,11 @@ export type DialogsPropsType = {
   onNewMessageChange: (value: string) => void
   onSendMessageClick: () => void
   // isAuth: boolean
+  addMessage: (newMessageText: string) => void
+}
+
+export type MessageFormDataType = {
+  messageText: string
 }
 
 const Dialogs = (props: DialogsPropsType) => {
@@ -29,6 +35,10 @@ const Dialogs = (props: DialogsPropsType) => {
 
   // if (!props.isAuth) return <Redirect to="/login" />
 
+  const addNewMessage = (data: MessageFormDataType) => {
+    props.addMessage(data.messageText);
+  }
+
   return (
     <div className={s.dialogs}>
       <div className={s.dialogItems}>
@@ -36,18 +46,25 @@ const Dialogs = (props: DialogsPropsType) => {
       </div>
       <div className={s.messages}>
         <div>{ messagesElement }</div>
-        <div>
-          <div><textarea
-            value={ props.message }
-            onChange={onNewMessageChange}
-            placeholder="Enter your message"
-          />
-          </div>
-          <div><button onClick={onSendMessageClick}>Send</button></div>
-        </div>
+
+        <AddMessageFormRedux onSubmit={addNewMessage} />
+
       </div>
     </div>
   )
 }
+
+const AddMessageForm: React.FC<InjectedFormProps<MessageFormDataType>> = (props) => {
+  return (
+    <form onSubmit={props.handleSubmit}>
+      <div>
+        <Field component="textarea" name="messageText" placeholder="Enter your message" />
+      </div>
+      <div><button>Send</button></div>
+    </form>
+  )
+}
+
+const AddMessageFormRedux = reduxForm<MessageFormDataType>({form: "dialogAddMessageForm"})(AddMessageForm);
 
 export default Dialogs;
