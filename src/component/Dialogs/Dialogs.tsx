@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import s from "./Dialogs.module.css"
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
@@ -10,8 +10,6 @@ import {Field, InjectedFormProps, reduxForm} from "redux-form";
 export type DialogsPropsType = {
   dialogs: Array<DialogType>
   messages: Array<MessageType>
-  message: string
-  onNewMessageChange: (value: string) => void
   onSendMessageClick: (messageText: string) => void
   // isAuth: boolean
 }

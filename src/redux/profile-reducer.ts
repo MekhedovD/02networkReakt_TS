@@ -3,13 +3,11 @@ import {Dispatch} from "react";
 import {profileAPI, usersAPI} from "../api/api";
 
 const ADD_POST = "ADD-POST";
-const CHANGE_NEW_TEXT = "CHANGE-NEW-TEXT";
 const SET_USER_PROFILE = "SET-USER-PROFILE";
 const SET_STATUS = "SET-STATUS";
 
 export type ProfileActionsTypes =
   ReturnType<typeof addPostAC> |
-  ReturnType<typeof changeNewTextAC> |
   ReturnType<typeof setUserProfile> |
   ReturnType<typeof setStatus>
 
@@ -43,7 +41,6 @@ export type UserProfileType = {
 
 type InitialStateType = {
   posts: Array<PostType>
-  newPostText: string
   profile: null | UserProfileType
   status: string
 }
@@ -53,7 +50,6 @@ let initialState: InitialStateType = {
     {message: "Hello! How are you", likeCount: 5, id: v1()},
     {message: "It's my first post", likeCount: 2, id: v1()},
   ],
-  newPostText: "",
   profile: null,
   status: ""
 };
@@ -65,19 +61,12 @@ const profileReducer = (state: InitialStateType = initialState, action: ProfileA
     case ADD_POST: {
       const newPost: PostType = {
         id: v1(),
-        message: state.newPostText,
+        message: action.newPostText,
         likeCount: 0
       };
       return {
         ...state,
-        posts: [...state.posts, newPost],
-        newPostText: ""
-      };
-    }
-    case CHANGE_NEW_TEXT: {
-      return {
-        ...state,
-        newPostText: action.newText
+        posts: [...state.posts, newPost]
       };
     }
     case SET_USER_PROFILE: {
@@ -98,21 +87,16 @@ const profileReducer = (state: InitialStateType = initialState, action: ProfileA
 }
 
 //ActionCreator
-export const addPostAC = () => {
+export const addPostAC = (newPostText: string) => {
   return {
-    type: ADD_POST
+    type: ADD_POST,
+    newPostText
   } as const
 }
 export const setUserProfile = (profile: UserProfileType | null) => {
   return {
     type: SET_USER_PROFILE,
     profile
-  } as const
-}
-export const changeNewTextAC = (newText: string) => {
-  return {
-    type: CHANGE_NEW_TEXT,
-    newText: newText
   } as const
 }
 

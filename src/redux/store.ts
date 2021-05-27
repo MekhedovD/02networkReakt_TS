@@ -1,4 +1,4 @@
-import {addPostAC, changeNewTextAC} from "./profile-reducer";
+import {addPostAC} from "./profile-reducer";
 import {sendMessageBodyAC} from "./dialogs-reducer";
 
 // всё нужно, ничего страшного)
@@ -42,7 +42,6 @@ export type RootStateType = { // нужн
 
 export type ActionsTypes = // но типы нужны
   ReturnType<typeof addPostAC> |
-  ReturnType<typeof changeNewTextAC> |
   ReturnType<typeof sendMessageBodyAC>;
 
 // просто игнорируем, но память)
