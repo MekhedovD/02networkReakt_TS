@@ -12,9 +12,8 @@ export type DialogsPropsType = {
   messages: Array<MessageType>
   message: string
   onNewMessageChange: (value: string) => void
-  onSendMessageClick: () => void
+  onSendMessageClick: (messageText: string) => void
   // isAuth: boolean
-  addMessage: (newMessageText: string) => void
 }
 
 export type MessageFormDataType = {
@@ -25,18 +24,10 @@ const Dialogs = (props: DialogsPropsType) => {
   let dialogsElement = props.dialogs.map(d => <DialogItem name={d.name} _id={d.id} key={d.id}/>)
   let messagesElement = props.messages.map(m => <Message message={m.message} _id={m.id} key={m.id}/>)
 
-  let onSendMessageClick = () => {
-    props.onSendMessageClick()
-  }
-
-  let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    props.onNewMessageChange(e.currentTarget.value)
-  }
-
   // if (!props.isAuth) return <Redirect to="/login" />
 
   const addNewMessage = (data: MessageFormDataType) => {
-    props.addMessage(data.messageText);
+    props.onSendMessageClick(data.messageText);
   }
 
   return (
