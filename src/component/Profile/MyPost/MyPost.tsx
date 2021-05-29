@@ -2,17 +2,11 @@ import React from "react";
 import s from "./MyPost.module.css";
 import {PostType} from "../../../redux/profile-reducer";
 import Post from "./Post/Post";
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {maxLengthCreator, required} from "../../../utils/Validators";
-import {FormControlTextarea} from "../../common/FormsControls/FormsControls";
+import {AddNewPostFormRedux, PostFormDateType} from "../AddNewPostForm/AddNewPostForm";
 
 export type MyPostPropsType = {
   posts: Array<PostType>
   addPost: (message: string) => void
-}
-
-export type PostFormDateType = {
-  newPostText: string
 }
 
 const MyPost = (props: MyPostPropsType) => {
@@ -34,27 +28,5 @@ const MyPost = (props: MyPostPropsType) => {
     </div>
   )
 }
-
-const maxLength10 = maxLengthCreator(10);
-
-const AddNewPostForm: React.FC<InjectedFormProps<PostFormDateType>> = (props) => {
-  return (
-    <form onSubmit={props.handleSubmit}>
-      <div>
-        <Field
-          component={FormControlTextarea}
-          name="newPostText"
-          validate={[required, maxLength10]}
-          placeholder={"Post message"}
-        />
-      </div>
-      <div>
-        <button>Add post</button>
-      </div>
-    </form>
-  )
-}
-
-const AddNewPostFormRedux = reduxForm<PostFormDateType>({form: "profileAddPostForm"})(AddNewPostForm);
 
 export default MyPost;

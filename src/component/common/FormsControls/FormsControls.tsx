@@ -18,4 +18,3 @@ export const FormsControlElementCreator = (Element: string) => ({input, meta, ..
 export const FormControlTextarea = FormsControlElementCreator("textarea");
 export const FormControlInput = FormsControlElementCreator("input");
 
-// }
