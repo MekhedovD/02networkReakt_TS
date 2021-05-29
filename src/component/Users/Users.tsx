@@ -3,8 +3,6 @@ import UsersPhoto from "../../assets/images/img.ava.png";
 import React from "react";
 import {UsersType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
-import {usersAPI} from "../../api/api";
 
 export type UsersPropsType = {
   users: Array<UsersType>
@@ -53,8 +51,7 @@ const Users = (props: UsersPropsType) => {
               : <button disabled={props.followingInProgress
                 .some(id => id === u.id)}
                         onClick={() => {props.follow(u.id)} }>Follow</button>}
-
-                </div>
+          </div>
                 </span>
                 <span>
                 <span>

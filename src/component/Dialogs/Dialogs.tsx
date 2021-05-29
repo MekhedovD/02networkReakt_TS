@@ -4,13 +4,14 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {DialogType, MessageType} from "../../redux/dialogs-reducer";
 import {AddMessageFormRedux} from "./AddMessageForm/AddMessageForm";
+import {Redirect} from "react-router-dom";
 
 
 export type DialogsPropsType = {
   dialogs: Array<DialogType>
   messages: Array<MessageType>
   onSendMessageClick: (messageText: string) => void
-  // isAuth: boolean
+  isAuth: boolean
 }
 
 export type MessageFormDataType = {
@@ -21,7 +22,7 @@ const Dialogs = (props: DialogsPropsType) => {
   let dialogsElement = props.dialogs.map(d => <DialogItem name={d.name} _id={d.id} key={d.id}/>)
   let messagesElement = props.messages.map(m => <Message message={m.message} _id={m.id} key={m.id}/>)
 
-  // if (!props.isAuth) return <Redirect to="/login" />
+  if (!props.isAuth) return <Redirect to="/login" />
 
   const addNewMessage = (data: MessageFormDataType) => {
     props.onSendMessageClick(data.messageText);
