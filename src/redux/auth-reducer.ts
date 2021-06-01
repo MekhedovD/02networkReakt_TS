@@ -1,5 +1,6 @@
 import {Dispatch} from "react";
 import {authAPI} from "../api/api";
+import {stopSubmit} from "redux-form";
 
 const SET_USER_DATA = "SET-USER-DATA";
 
@@ -27,8 +28,7 @@ export const authReducer = (state: AuthStateType = initialState, action: AuthAct
     case SET_USER_DATA:
       return {
         ...state,
-        ...action.payload,
-        // isAuth: true
+        ...action.payload
       }
     default:
       return state
@@ -59,6 +59,9 @@ export const login = (email: string, password: string, rememberMe: boolean) => (
     .then(response => {
       if (response.data.resultCode === 0) {
         dispatch(getAuthUserData());
+      } else {
+        let message = response.data.messages !== 0 ? response.data.messages[0] : "some error";
+       dispatch(stopSubmit("login", {_error: message}));
       }
     })
 }

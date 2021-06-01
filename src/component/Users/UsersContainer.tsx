@@ -50,7 +50,8 @@ class UsersContainer extends React.Component<UsersPropsType> {
   }
 
   onPageChanged = (pageNumber: number) => {
-    this.props.getUsers(pageNumber, this.props.pageSize);
+    this.props.getUsers(pageNumber, this.props.pageSize); //тут запрос за новыми юзерами
+    this.props.setCurrentPage(pageNumber) //тут  мы устанавливаем новую страничку активной
   }
 
   render() {
@@ -111,11 +112,11 @@ export default compose<React.ComponentType>(
   connect(mapStateToProps, {
     followSuccess,
     unfollowSuccess,
-    setCurrentPage,
+    setCurrentPage, //вот этот актион надо вызвать когда меняешь страничку
     toggleFollowingProgress,
     getUsers
   }),
-  withAuthRedirect,
+  withAuthRedirect,// да 'то защита? что,ы не авторизованный .зер не смог попасть на 'ту страничку
 )(UsersContainer)
 
 

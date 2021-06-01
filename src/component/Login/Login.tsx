@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import {login} from "../../redux/auth-reducer";
 import {Redirect} from "react-router-dom";
 import {RootStateType} from "../../redux/redux-store";
+import s from "../common/FormsControls/FormsControls.module.css"
 
 type FormDataType = {
   login: string
@@ -14,7 +15,7 @@ type FormDataType = {
 }
 
 type LoginPropsType = {
-  // isAuth: boolean
+  isAuth: boolean
   login: (login: string, password: string, rememberMe: boolean) => void;
 }
 
@@ -39,9 +40,14 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
         />
       </div>
       <div>
-        <Field type="checkbox" name="rememberMe" component ={FormControlInput}/> remember me
+        <Field type="checkbox" name="rememberMe" component={FormControlInput}/> remember me
       </div>
       <div>
+        {props.error && <div className={s.formError}>
+            {props.error}
+          </div> }
+
+
         <button>Login</button>
       </div>
     </form>
@@ -56,10 +62,8 @@ const Login = (props: LoginPropsType) => {
     props.login(formData.login, formData.password, formData.rememberMe)
     // console.log(formData)
   }
-
-  // if (props.) {
-  //   return <Redirect to={"/profile"}/>
-  // }
+//если успешный логин то нужно отправить на профайл, а было на логин
+  if (props.isAuth) return <Redirect to="/profile"/>
 
   return <div>
     <h1>LOGIN</h1>

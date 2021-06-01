@@ -22,7 +22,7 @@ const Dialogs = (props: DialogsPropsType) => {
   let dialogsElement = props.dialogs.map(d => <DialogItem name={d.name} _id={d.id} key={d.id}/>)
   let messagesElement = props.messages.map(m => <Message message={m.message} _id={m.id} key={m.id}/>)
 
-  if (!props.isAuth) return <Redirect to="/login" />
+  // if (!props.isAuth) return <Redirect to="/login" />
 
   const addNewMessage = (data: MessageFormDataType) => {
     props.onSendMessageClick(data.messageText);
