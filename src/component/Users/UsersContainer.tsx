@@ -116,7 +116,7 @@ export default compose<React.ComponentType>(
     toggleFollowingProgress,
     getUsers
   }),
-  withAuthRedirect,// да 'то защита? что,ы не авторизованный .зер не смог попасть на 'ту страничку
+  // withAuthRedirect,// да 'то защита? что,ы не авторизованный .зер не смог попасть на 'ту страничку
 )(UsersContainer)
 
 
