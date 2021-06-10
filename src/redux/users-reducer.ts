@@ -1,7 +1,9 @@
 import {usersAPI} from "../api/api";
 import {Dispatch} from "react";
+import store from "./redux-store";
 
 const FOLLOW = "FOLLOW";
+const FAKE = "FAKE";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
@@ -11,6 +13,7 @@ const TOGGLE_IS_FOLLOWING_PROGRESS = "TOGGLE_IS_FOLLOWING_PROGRESS";
 
 export type UsersActionsTypes =
   ReturnType<typeof followSuccess> |
+  ReturnType<typeof fake> |
   ReturnType<typeof unfollowSuccess> |
   ReturnType<typeof setUsers> |
   ReturnType<typeof setCurrentPage> |
@@ -37,6 +40,7 @@ type InitialStateType = {
   currentPage: number
   isLoading: boolean
   followingInProgress: Array<number>
+  fake: number
 }
 
 let initialState: InitialStateType = {
@@ -45,12 +49,14 @@ let initialState: InitialStateType = {
   totalUsersCount: 0,
   currentPage: 1,
   isLoading: true,
-  followingInProgress: []
+  followingInProgress: [],
+  fake: 10
 };
 
 //Reducer
 const usersReducer = (state: InitialStateType = initialState, action: UsersActionsTypes): InitialStateType => {
   switch (action.type) {
+    case FAKE: return {...state, fake: state.fake + 1}
     case FOLLOW:
       return {
         ...state,
@@ -101,11 +107,19 @@ const usersReducer = (state: InitialStateType = initialState, action: UsersActio
   }
 }
 
+
+
 // ActionCreator
-export const followSuccess = (userId: number) => {
+export const  followSuccess = (userId: number) => {
   return {
     type: FOLLOW,
     userId
+  } as const
+}
+
+export const fake = () => {
+  return {
+    type: FAKE,
   } as const
 }
 
@@ -153,10 +167,11 @@ export const toggleFollowingProgress = (isLoading: boolean, userId: number) => {
 }
 
 // thunk
-export const getUsers = (currentPage: number, pageSize: number) => {
+export const requestUsers = (page: number, pageSize: number) => {
   return (dispatch: Dispatch<any>) => {
     dispatch(toggleIsLoading(true));
-    usersAPI.getUsers(currentPage, pageSize)
+    // dispatch(setCurrentPage(page));
+    usersAPI.getUsers(page, pageSize)
       .then(data => {
         dispatch(toggleIsLoading(false));
         dispatch(setUsers(data.items));

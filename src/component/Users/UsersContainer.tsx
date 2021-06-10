@@ -1,16 +1,21 @@
 import React from "react";
 import {connect} from "react-redux";
-import {RootStateType} from "../../redux/redux-store";
+import store, {RootStateType} from "../../redux/redux-store";
 import {
   followSuccess,
   setCurrentPage, toggleFollowingProgress,
   unfollowSuccess,
-  UsersType, getUsers,
+  UsersType, requestUsers,
 } from "../../redux/users-reducer";
 import Users from "./Users";
 import Preloader from "../common/Preolader/Preolader";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import { compose } from "redux";
+import {
+  getCurrentPage, getFollowingInProgress, getIsLoading,
+  getPageSize, getTotalCount,
+  getTotalUsersCount, getUsers
+} from "../../redux/users-selector";
 
 type MapStateToProps = {
   users: Array<UsersType>
@@ -21,15 +26,6 @@ type MapStateToProps = {
   isLoading: boolean
   followingInProgress: Array<number>
 }
-
-// type MapDispatchToProps = {
-//   follow: (userId: number) => void,
-//   unfollow: (userId: number) => void,
-//   setUser: (users: Array<UsersType>) => void,
-//   setCurrentPage: (pageNumber: number) => void,
-//   setTotalUsersCount: (totalCount: number) => void,
-//   toggleIsLoading: (isLoading: boolean) => void
-// }
 
 type UsersPropsType = {
   users: Array<UsersType>
@@ -55,6 +51,7 @@ class UsersContainer extends React.Component<UsersPropsType> {
   }
 
   render() {
+    console.log("ESERS")
     return <>
       { this.props.isLoading ? <Preloader /> : null }
       <Users totalUsersCount={this.props.totalUsersCount}
@@ -70,43 +67,32 @@ class UsersContainer extends React.Component<UsersPropsType> {
   }
 }
 
-let mapStateToProps = (state: RootStateType): MapStateToProps => {
-  return {
-    users: state.usersPage.users,
-    pageSize: state.usersPage.pageSize,
-    totalUsersCount: state.usersPage.totalUsersCount,
-    currentPage: state.usersPage.currentPage,
-    totalCount: state.usersPage.totalUsersCount,
-    isLoading: state.usersPage.isLoading,
-    followingInProgress: state.usersPage.followingInProgress
-  }
-}
-
-// let mapDispatchToProps = (dispatch: Dispatch<Action<string>>): MapDispatchToProps => {
+// let mapStateToProps = (state: RootStateType): MapStateToProps => {
 //   return {
-//     follow: (userId: number) => {
-//       dispatch(followAC(userId));
-//     },
-//     unfollow: (userId: number) => {
-//       dispatch(unfollowAC(userId));
-//     },
-//     setUser: (users: Array<UsersType>) => {
-//       dispatch(setUsersAC(users));
-//     },
-//     setCurrentPage: (pageNumber: number) => {
-//       dispatch(setCurrentPageAC(pageNumber));
-//     },
-//     setTotalUsersCount: (totalCount: number) => {
-//       dispatch(setUsersTotalCountAC(totalCount));
-//     },
-//     toggleIsLoading: (isLoading:boolean ) => {
-//       dispatch(toggleIsLoadingAC(isLoading));
-//     },
-//     toggleFollowingProgress: (isLoading: boolean) => {
-//     dispatch(toggleFollowingProgress(isLoading))
-//     }
+//     users: state.usersPage.users,
+//     pageSize: state.usersPage.pageSize,
+//     totalUsersCount: state.usersPage.totalUsersCount,
+//     currentPage: state.usersPage.currentPage,
+//     totalCount: state.usersPage.totalUsersCount,
+//     isLoading: state.usersPage.isLoading,
+//     followingInProgress: state.usersPage.followingInProgress
 //   }
 // }
+
+let mapStateToProps = (state: RootStateType): MapStateToProps => {
+  console.log("mapStateTP USERSD")
+
+  return {
+    users: getUsers(state),
+    // users: getUsersSuperSelector(state),
+    pageSize: getPageSize(state),
+    totalUsersCount: getTotalUsersCount(state),
+    currentPage: getCurrentPage(state),
+    totalCount: getTotalCount(state),
+    isLoading: getIsLoading(state),
+    followingInProgress: getFollowingInProgress(state)
+  }
+}
 
 export default compose<React.ComponentType>(
   connect(mapStateToProps, {
@@ -114,7 +100,7 @@ export default compose<React.ComponentType>(
     unfollowSuccess,
     setCurrentPage, //вот этот актион надо вызвать когда меняешь страничку
     toggleFollowingProgress,
-    getUsers
+    getUsers: requestUsers
   }),
   // withAuthRedirect,// да 'то защита? что,ы не авторизованный .зер не смог попасть на 'ту страничку
 )(UsersContainer)
