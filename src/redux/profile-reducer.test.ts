@@ -1,4 +1,4 @@
-import profileReducer, {addPostAC, UserProfileType} from "./profile-reducer";
+import profileReducer, {addPostAC, deletePost, UserProfileType} from "./profile-reducer";
 
 export type PostType = {
   message: string
@@ -38,10 +38,18 @@ test('message of new post should be correct', () => {
 });
 
 test('after deleting length of messages should be decrement', () => {
-  let action = deletePost();
+  let action = deletePost("2");
 
   let newState = profileReducer(state,action);
 
-  expect(newState.posts).toBe(2);
+  expect(newState.posts.length).toBe(1);
+});
+
+test('after deleting length should not be decrement if id is incorect', () => {
+  let action = deletePost("1000");
+
+  let newState = profileReducer(state,action);
+
+  expect(newState.posts.length).toBe(2);
 });
 
