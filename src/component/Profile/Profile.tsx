@@ -2,6 +2,7 @@ import React from "react";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostContainer from "./MyPost/MyPostContainer";
 import {UserProfileType} from "../../redux/profile-reducer";
+import Login from "../Login/Login";
 
 type ProfilePropsType = {
   profile: UserProfileType | null
