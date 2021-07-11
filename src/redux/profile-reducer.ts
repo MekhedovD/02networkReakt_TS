@@ -99,11 +99,16 @@ export const setUserProfile = (profile: UserProfileType | null) => {
     profile
   } as const
 }
-
 export const setStatus = (status: string) => {
   return {
     type: SET_STATUS,
     status: status
+  } as const
+}
+export const deletePost = (postId: string) => {
+  return {
+    type: SET_STATUS,
+    postId
   } as const
 }
 
