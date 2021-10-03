@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/02networkReakt_TS/static/css/main.d7ed4095.chunk.css",
+    "main.js": "/02networkReakt_TS/static/js/main.9937cdbc.chunk.js",
+    "main.js.map": "/02networkReakt_TS/static/js/main.9937cdbc.chunk.js.map",
+    "runtime-main.js": "/02networkReakt_TS/static/js/runtime-main.af593cc7.js",
+    "runtime-main.js.map": "/02networkReakt_TS/static/js/runtime-main.af593cc7.js.map",
+    "static/js/2.9c37fd0a.chunk.js": "/02networkReakt_TS/static/js/2.9c37fd0a.chunk.js",
+    "static/js/2.9c37fd0a.chunk.js.map": "/02networkReakt_TS/static/js/2.9c37fd0a.chunk.js.map",
+    "static/js/3.13208375.chunk.js": "/02networkReakt_TS/static/js/3.13208375.chunk.js",
+    "static/js/3.13208375.chunk.js.map": "/02networkReakt_TS/static/js/3.13208375.chunk.js.map",
+    "index.html": "/02networkReakt_TS/index.html",
+    "static/css/main.d7ed4095.chunk.css.map": "/02networkReakt_TS/static/css/main.d7ed4095.chunk.css.map",
+    "static/js/2.9c37fd0a.chunk.js.LICENSE.txt": "/02networkReakt_TS/static/js/2.9c37fd0a.chunk.js.LICENSE.txt",
+    "static/js/main.9937cdbc.chunk.js.LICENSE.txt": "/02networkReakt_TS/static/js/main.9937cdbc.chunk.js.LICENSE.txt",
+    "static/media/img.ava.6ed02bbb.png": "/02networkReakt_TS/static/media/img.ava.6ed02bbb.png",
+    "static/media/preolader.b988d774.svg": "/02networkReakt_TS/static/media/preolader.b988d774.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.af593cc7.js",
+    "static/js/2.9c37fd0a.chunk.js",
+    "static/css/main.d7ed4095.chunk.css",
+    "static/js/main.9937cdbc.chunk.js"
+  ]
+}
